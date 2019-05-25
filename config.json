@@ -1,0 +1,28 @@
+{
+  "name":"Referral",
+  "admin_menus":{
+    "Parrainage":{
+      "index": "9",
+      "icon":"user",
+      "menu": {
+        "Général": {
+          "icon": "home",
+          "route":"/admin/referral"
+        }
+      }
+    }
+  },
+  "author":"Snkh",
+  "version":"1.0.0",
+  "useEvents":false,
+  "permissions" : {
+    "available" : [],
+    "default" : {
+      "0" : [],
+      "2" : []
+    }
+  },
+  "requirements" : {
+    "CMS" : "^1.2.0"
+  }
+}
