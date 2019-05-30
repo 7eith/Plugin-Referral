@@ -10,4 +10,8 @@
  *
  **************************************************************************** */
 
+Router::connect('/referral/setReferral',      array('controller' => 'referral', 'action' => 'setReferral',  'plugin' => 'referral'));
+
+
 Router::connect('/admin/referral',            array('controller' => 'referral', 'action' => 'index',  'plugin' => 'referral', 'admin' => true));
+

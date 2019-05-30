@@ -3,5 +3,13 @@
     "REFERRAL__ADMIN_TITLE": "Liste des parrainages",
     "REFERRAL__ADMIN_USER": "Parrain",
     "REFERRAL__ADMIN_IP": "Adresse IP",
-    "REFERRAL__ADMIN_REFERRAL": "Parrainer"
+    "REFERRAL__HAS_REFERRAL": "Vous avez deja parrainer quelqu'un",
+    "REFERRAL__IP_ALREADY_USED": "IP deja use",
+    "REFERRAL__USER_NOT_EXIST": "Cette utilisateur n'existe pas..",
+    "REFERRAL__OK": "Vous venez de parrainer ",
+
+    "REFERRAL__PROFILE_TITLE": "Parrainage",
+    "REFERRAL__WARNING_SET": "Vous pouvez definir un parrain une seule fois, decidez bien!",
+    "REFERRAL__PROFILE_FORM": "Parrain"
+
 }
