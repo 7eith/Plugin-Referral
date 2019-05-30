@@ -22,6 +22,7 @@ class ReferralAppSchema extends CakeSchema {
 
     public $referral__datas = array(
         'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'length' => 20, 'unsigned' => false, 'key' => 'primary'),
+        'ip' => array('type' => 'string', 'null' => false, 'default' => null, 'collate' => 'latin1_swedish_ci', 'charset' => 'latin1'),
         'user_id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false),
         'referral_id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false),
         'created' => array('type' => 'datetime', 'null' => true, 'default' => null),
