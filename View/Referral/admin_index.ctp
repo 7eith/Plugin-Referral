@@ -27,7 +27,6 @@
                                 <th><?= $Lang->get('REFERRAL__ADMIN_IP') ?></th>
                                 <th><?= $Lang->get('REFERRAL__ADMIN_REFERRAL') ?></th>
                                 <th><?= $Lang->get('GLOBAL__CREATED') ?></th>
-                                <th><?= $Lang->get('GLOBAL__ACTIONS') ?></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -39,9 +38,6 @@
                                             <td><?= $value['Referral']['ip'] ?></td>
                                             <td><?= $usersByID[$value['Referral']['referral_id']] ?></td>
                                             <td><?= $Lang->date($value['Referral']['created']) ?></td>
-                                            <td>
-                                                <a href="" class="label label-danger"><?= $Lang->get('GLOBAL__DELETE') ?></a>
-                                            </td>
                                         </tr>
                                     <?php } ?>
                                 <?php } ?>

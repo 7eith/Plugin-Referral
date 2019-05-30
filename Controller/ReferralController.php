@@ -69,6 +69,10 @@ class ReferralController extends AppController {
       $this->Referral->set(array('referral_id' => $user['User']['id']));
       
       $this->Referral->save();
+
+      // adding 10 of money
+      $user['User']['money'] = $user['User']['money'] + 10; 
+      $this->User->save($user);
       
       $this->response->body(json_encode(array('statut' => true, 'msg' => $this->Lang->get('REFERRAL__OK') . $user['User']['pseudo'])));
     
