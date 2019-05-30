@@ -1,1 +1,7 @@
-{}
+{
+    "REFERRAL__LAYOUT_INDEX": "Parrainage",
+    "REFERRAL__ADMIN_TITLE": "Liste des parrainages",
+    "REFERRAL__ADMIN_USER": "Parrain",
+    "REFERRAL__ADMIN_IP": "Adresse IP",
+    "REFERRAL__ADMIN_REFERRAL": "Parrainer"
+}

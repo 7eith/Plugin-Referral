@@ -9,3 +9,5 @@
  * Under private Copyright, all rights reserved to Snkh.
  *
  **************************************************************************** */
+
+Router::connect('/admin/referral',            array('controller' => 'referral', 'action' => 'index',  'plugin' => 'referral', 'admin' => true));
