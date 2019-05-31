@@ -2,14 +2,9 @@
   "name":"Referral",
   "admin_menus":{
     "Parrainage":{
-      "index": "9",
+      "index": "7",
       "icon":"user",
-      "menu": {
-        "Général": {
-          "icon": "home",
-          "route":"/admin/referral"
-        }
-      }
+      "route":"/admin/referral"
     }
   },
   "author":"Snkh",
