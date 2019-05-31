@@ -10,7 +10,9 @@
  *
  **************************************************************************** */
 
+Router::connect('/r/:user_referral',          array('controller' => 'referral', 'action' => 'register',  'plugin' => 'referral'));
 Router::connect('/referral/setReferral',      array('controller' => 'referral', 'action' => 'setReferral',  'plugin' => 'referral'));
+Router::connect('/referral/register',         array('controller' => 'referral', 'action' => 'ajax_register',  'plugin' => 'referral'));
 
 /**
  * Admin 
