@@ -5,12 +5,16 @@
     "REFERRAL__ADMIN_IP": "Adresse IP",
     "REFERRAL__ADMIN_REFERRAL": "Parrainer",
     "REFERRAL__HAS_REFERRAL": "Vous avez deja parrainer quelqu'un",
-    "REFERRAL__IP_ALREADY_USED": "IP deja use",
+    "REFERRAL__IP_ALREADY_USED": "Adresse IP deja utiliser..",
     "REFERRAL__USER_NOT_EXIST": "Cette utilisateur n'existe pas..",
     "REFERRAL__OK": "Vous venez de parrainer ",
 
     "REFERRAL__PROFILE_TITLE": "Parrainage",
     "REFERRAL__WARNING_SET": "Vous pouvez definir un parrain une seule fois, decidez bien!",
-    "REFERRAL__PROFILE_FORM": "Parrain"
+    "REFERRAL__PROFILE_FORM": "Parrain", 
 
+    "REFERRAL__REGISTER_TITLE": "S'inscrire", 
+    "REFERRAL__REGISTER_REFERRAL": "Parrain",
+
+    "REFERRAL__AUTHOR": "Snkh <iamsnkh@pm.me>"
 }
