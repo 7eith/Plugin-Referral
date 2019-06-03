@@ -142,7 +142,7 @@ class ReferralController extends AppController {
                 $user = $this->User->find('first', array('conditions' => array('pseudo' => $this->request->data['referral'])));
 
                 if($user['User']['pseudo'] == $this->request->data['referral'])
-                  return $this->response->body(json_encode(array('statut' => false, 'msg' => $this->Lang->get('REFERRAL__ERROR_YOURSELF'))));
+                  return $this->response->body(json_encode(array('statut' => true, 'msg' => $this->Lang->get('REFERRAL__ERROR_YOURSELF'))));
                 
                 if($user != null) {
                   
@@ -160,7 +160,7 @@ class ReferralController extends AppController {
                   return $this->response->body(json_encode(array('statut' => false, 'msg' => $this->Lang->get('REFERRAL__USER_NOT_EXIST'))));
                 }
               } else {
-                return $this->response->body(json_encode(array('statut' => false, 'msg' => $this->Lang->get('REFERRAL__IP_ALREADY_USED'))));
+                return $this->response->body(json_encode(array('statut' => true, 'msg' => $this->Lang->get('REFERRAL__IP_ALREADY_USED'))));
               }
             }
             
