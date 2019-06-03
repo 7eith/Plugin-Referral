@@ -16,5 +16,7 @@
     "REFERRAL__REGISTER_TITLE": "S'inscrire", 
     "REFERRAL__REGISTER_REFERRAL": "Parrain",
 
+    "REFERRAL__ERROR_YOURSELF": "Vous ne pouvez pas etre votre propre parrain!",
+
     "REFERRAL__AUTHOR": "Snkh <iamsnkh@pm.me>"
 }

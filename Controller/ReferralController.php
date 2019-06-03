@@ -140,6 +140,9 @@ class ReferralController extends AppController {
               // check IP 
               if($this->Referral->find('count', ['conditions' => ['ip' => $this->request->clientIp()]]) == 0) {
                 $user = $this->User->find('first', array('conditions' => array('pseudo' => $this->request->data['referral'])));
+
+                if($user['User']['pseudo'] == $this->request->data['referral'])
+                  return $this->response->body(json_encode(array('statut' => false, 'msg' => $this->Lang->get('REFERRAL__ERROR_YOURSELF'))));
                 
                 if($user != null) {
                   
