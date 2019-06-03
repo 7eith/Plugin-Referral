@@ -12,6 +12,8 @@
     "REFERRAL__PROFILE_TITLE": "Parrainage",
     "REFERRAL__WARNING_SET": "Vous pouvez definir un parrain une seule fois, decidez bien!",
     "REFERRAL__PROFILE_FORM": "Parrain", 
+    "REFERRAL__LINK": "Votre lien de Parrainage:", 
+
 
     "REFERRAL__REGISTER_TITLE": "S'inscrire", 
     "REFERRAL__REGISTER_REFERRAL": "Parrain",

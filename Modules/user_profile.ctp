@@ -19,16 +19,12 @@
     <div class="panel-body" style="padding: 30px 20px;">
         <form method="post" data-ajax="true" action="<?= $this->Html->url(array('controller' => 'referral', 'action' => 'setReferral')) ?>">
             <div class="row" style="padding-left: 20px;">
-
-                <div class="alert alert-danger"><a class="close" data-dismiss="alert">×</a><b><?= $Lang->get('REFERRAL__WARNING_SET') ?></b> </div>
-                <div class="form-group">
-                    <label><?= $Lang->get("REFERRAL__PROFILE_FORM") ?></label>
-                    <input type="text" class="form-control" name="referral">
+            <?= $Lang->get("REFERRAL__LINK") ?> <br><br>
+                <div class="alert alert-info"><a class="close" data-dismiss="alert">×</a>
+                    <a style="color:white;" href="https://qataria.fr/r/<?= $user['pseudo'] ?>">
+                        <center>https://qataria.fr/r/<?= $user['pseudo'] ?></center>
+                    </a> 
                 </div>
-            </div>
-
-            <div class="text-right">
-                <button type="submit" class="btn btn-primary btn-large"><?= $Lang->get('GLOBAL__SUBMIT') ?></button>
             </div>
         </form>
     </div>
