@@ -6,7 +6,7 @@
     "REFERRAL__ADMIN_REFERRAL": "Parrainer",
     "REFERRAL__HAS_REFERRAL": "Vous avez deja parrainer quelqu'un",
     "REFERRAL__IP_ALREADY_USED": "Adresse IP deja utiliser..",
-    "REFERRAL__USER_NOT_EXIST": "Cette utilisateur n'existe pas..",
+    "REFERRAL__USER_NOT_EXIST": "L'utilisateur que vous voulez parrainer n'existe pas..",
     "REFERRAL__OK": "Vous venez de parrainer ",
 
     "REFERRAL__PROFILE_TITLE": "Parrainage",

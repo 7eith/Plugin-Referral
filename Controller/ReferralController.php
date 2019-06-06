@@ -128,8 +128,6 @@ class ReferralController extends AppController {
               return $event->result;
             }
             
-            $userSession = $this->User->register($this->request->data, $this->Util);
-            
             /**
             * Check
             */
@@ -141,10 +139,11 @@ class ReferralController extends AppController {
               if($this->Referral->find('count', ['conditions' => ['ip' => $this->request->clientIp()]]) == 0) {
                 $user = $this->User->find('first', array('conditions' => array('pseudo' => $this->request->data['referral'])));
 
-                if($user['User']['pseudo'] == $this->request->data['referral'])
-                  return $this->response->body(json_encode(array('statut' => true, 'msg' => $this->Lang->get('REFERRAL__ERROR_YOURSELF'))));
+                if($this->request->data['pseudo'] == $this->request->data['referral'])
+                  return $this->response->body(json_encode(array('statut' => false, 'msg' => $this->Lang->get('REFERRAL__ERROR_YOURSELF'))));
                 
                 if($user != null) {
+                  $userSession = $this->User->register($this->request->data, $this->Util);
                   
                   $this->Referral->read(null, null);
                   $this->Referral->set(array('ip' => $this->request->clientIp()));
@@ -160,8 +159,10 @@ class ReferralController extends AppController {
                   return $this->response->body(json_encode(array('statut' => false, 'msg' => $this->Lang->get('REFERRAL__USER_NOT_EXIST'))));
                 }
               } else {
-                return $this->response->body(json_encode(array('statut' => true, 'msg' => $this->Lang->get('REFERRAL__IP_ALREADY_USED'))));
+                return $this->response->body(json_encode(array('statut' => false, 'msg' => $this->Lang->get('REFERRAL__IP_ALREADY_USED'))));
               }
+            } else { // no referral 
+              $userSession = $this->User->register($this->request->data, $this->Util);
             }
             
             if ($this->Configuration->getKey('confirm_mail_signup')) {
