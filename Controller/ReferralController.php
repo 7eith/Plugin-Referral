@@ -6,6 +6,8 @@
 * by: Snkh <dev@snkh.me>
 *
 * Created: 28/05/2019 19:20 by Snkh
+* Updated: 06/08/2019 03:43 by Snkh
+* 
 * Under private Copyright, all rights reserved to Snkh.
 *
 **************************************************************************** */
@@ -36,54 +38,6 @@ class ReferralController extends AppController {
     
     $this->set(compact('referrals', 'usersByID'));   
   }
-  
-  /** 
-  * AJAX set Referral to Model :: User
-  */
-  
-  public function setReferral() { 
-    if(!$this->isConnected) 
-      throw new ForbiddenException();
-    
-    if(!$this->request->is('ajax')) 
-      return $this->response->body(json_encode(array('statut' => false, 'msg' => $this->Lang->get('ERROR__BAD_REQUEST'))));
-    
-    $this->loadModel('Referral.Referral');
-    $this->response->type('json');
-    $this->autoRender = false;
-
-    // IP ?? => better to hide reason? 
-    if($this->Referral->find('count', ['conditions' => ['ip' => $this->request->clientIp()]]) != 0) 
-      return $this->response->body(json_encode(array('statut' => false, 'msg' => $this->Lang->get('REFERRAL__IP_ALREADY_USED'))));
-    
-    // has referral anyone 
-    if($this->Referral->find('count', ['conditions' => ['user_id' => $this->User->getKey('id')]]) != 0) 
-      return $this->response->body(json_encode(array('statut' => false, 'msg' => $this->Lang->get('REFERRAL__HAS_REFERRAL'))));
-    
-    if (!empty($this->request->data['referral'])) {
-      $user = $this->User->find('first', array('conditions' => array('pseudo' => $this->request->data['referral'])));
-      
-      if($user == null)
-        return $this->response->body(json_encode(array('statut' => false, 'msg' => $this->Lang->get('REFERRAL__USER_NOT_EXIST'))));
-      
-      $this->Referral->read(null, null);
-      $this->Referral->set($this->request->data);
-      $this->Referral->set(array('ip' => $this->request->clientIp()));
-      $this->Referral->set(array('user_id' => $this->User->getKey('id')));
-      $this->Referral->set(array('referral_id' => $user['User']['id']));
-      
-      $this->Referral->save();
-
-      // adding 10 of money
-      $user['User']['money'] = $user['User']['money'] + 10; 
-      $this->User->save($user);
-      
-      $this->response->body(json_encode(array('statut' => true, 'msg' => $this->Lang->get('REFERRAL__OK') . $user['User']['pseudo'])));
-    
-    } else { 
-      $this->response->body(json_encode(array('statut' => false, 'msg' => $this->Lang->get('ERROR__FILL_ALL_FIELDS'))));
-    }
-  }
 
   /**
    * GET :: Redirecting to /r/:user
@@ -95,6 +49,48 @@ class ReferralController extends AppController {
 
     $this->set('title_for_layout', $this->Lang->get('REFERRAL__REGISTER_TITLE'));
     $this->set('referral', $this->request->params['user_referral']);
+  }
+
+  /**
+   * AJAX :: Confirm referral
+   */
+
+  public function confirm() { 
+    $this->autoRender = false;
+    $this->response->type('json');
+    $confirmEmailIsNeeded = ($this->Configuration->getKey('confirm_mail_signup') && $this->Configuration->getKey('confirm_mail_signup_block'));
+      
+    // bad request
+    if (!$this->request->is('Post') || !$this->isConnected) 
+      return $this->response->body(json_encode(array('statut' => false, 'msg' => $this->Lang->get('ERROR__BAD_REQUEST'))));
+
+    // double check, sur to not use curl
+    if ($confirmEmailIsNeeded && !empty($this->User->getKey('confirmed')))
+      return $this->response->body(json_encode(array('statut' => false, 'msg' => $this->Lang->get('REFERRAL__ERROR_EMAIL'))));
+
+    $this->loadModel('User');
+    $this->loadModel('Referral.Referral');
+
+    // referral table
+    $referral = $this->Referral->find('first', array('conditions' => array('user_id' => $this->User->getKey('id'))));
+
+    if ($referral['Referral']['pay'] == true)
+      return $this->response->body(json_encode(array('statut' => false, 'msg' => $this->Lang->get('REFERRAL__ERROR_ALREADY_CONFIRMED'))));
+
+    // get user referred
+    $referred = $this->User->find('first', array('conditions' => array('id' => $referral['Referral']['referral_id'])));
+
+    // adding 10 to referred
+    $this->User->read(null, $referred['User']['id']);
+    $this->User->set(array('money' => $referred['User']['money'] + 10));
+    $this->User->save();
+
+    // set has already pay
+    $this->Referral->read(null, $referral['Referral']['id']);
+    $this->Referral->set(array('pay' => true));
+    $this->Referral->save();
+
+    return $this->response->body(json_encode(array('statut' => true, 'msg' => $this->Lang->get('REFERRAL__CONFIRMED') . $this->User->getKey('pseudo'))));
   }
   
   /** 
@@ -152,7 +148,6 @@ class ReferralController extends AppController {
                   
                   $this->Referral->save();
                   
-                  $user['User']['money'] = $user['User']['money'] + 10; 
                   $this->User->save($user);
                   
                 } else { 
@@ -177,7 +172,7 @@ class ReferralController extends AppController {
                 $this->request->data['email'],
                 $this->Lang->get('EMAIL__TITLE_CONFIRM_MAIL'),
                 $emailMsg
-                )->sendMail();
+                )->sendMail(); // internal error if no mail send.. but user registered
                 if ($email) {
                   $this->User->read(null, $this->User->getLastInsertID());
                   $this->User->set(array('confirmed' => $confirmCode));

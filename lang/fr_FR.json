@@ -19,6 +19,14 @@
     "REFERRAL__REGISTER_REFERRAL": "Parrain",
 
     "REFERRAL__ERROR_YOURSELF": "Vous ne pouvez pas etre votre propre parrain!",
+    "REFERRAL__ERROR_EMAIL": "Vous ne pouvez pas faire cette action si vous n'avez pas confirmer votre email!",
+    "REFERRAL__ERROR_ALREADY_CONFIRMED": "Vous avez deja confirmer votre parain!",
+
+
+    "REFERRAL__PROFILE_CONFIRM": "Confirmer son parrainage",
+    "REFERRAL__CONFIRMED": "Votre parrain est desormais: ",
+
+
 
     "REFERRAL__AUTHOR": "Snkh <iamsnkh@pm.me>"
 }
