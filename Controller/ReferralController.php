@@ -28,6 +28,7 @@ class ReferralController extends AppController {
     
     foreach ($referrals as $key => $value) {
       $usersToFind[] = $value['Referral']['user_id'];
+      $usersToFind[] = $value['Referral']['referral_id'];
     }
     
     $usersByID = array();
